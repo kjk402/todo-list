@@ -37,7 +37,7 @@ public class CardService {
     }
 
     public Card create(Long columnId, String title, String contents) {
-        double flag = 0;
+        double flag = 1;
 
         if (columnId == 1) {
             List<Double> flags = new ArrayList<>(cardRepository.toDoFlag());
@@ -84,18 +84,34 @@ public class CardService {
         double flag = 0;
         if (toColumnId == 1) {
             List<Double> flags = new ArrayList<>(cardRepository.toDoFlag());
-
-            flag = (flags.get(index - 1) + flags.get(index -2)) / 2;
-
+            if (flags.size() == 0) {
+                flag = 1;
+            } else if (index == 1) {
+                flag = 0 + flags.get(0) / 2;
+            } else {
+                flag = (flags.get(index - 1) + flags.get(index - 2)) / 2;
+            }
         }
         if (toColumnId == 2) {
             List<Double> flags = new ArrayList<>(cardRepository.doingFlag());
-            flag = (flags.get(index - 1) + flags.get(index - 2)) / 2;
+            if (flags.size() == 0) {
+                flag = 1;
+            } else if (index == 1) {
+                flag = 0 + flags.get(0) / 2;
+            } else {
+                flag = (flags.get(index - 1) + flags.get(index - 2)) / 2;
+            }
 
         }
         if (toColumnId == 3) {
             List<Double> flags = new ArrayList<>(cardRepository.doneFlag());
-            flag = (flags.get(index - 1) + flags.get(index -2)) / 2;
+            if (flags.size() == 0) {
+                flag = 1;
+            } else if (index == 1) {
+                flag = 0 + flags.get(0) / 2;
+            } else {
+                flag = (flags.get(index - 1) + flags.get(index - 2)) / 2;
+            }
 
         }
         Long fromColumnId = card.getColumnId();
