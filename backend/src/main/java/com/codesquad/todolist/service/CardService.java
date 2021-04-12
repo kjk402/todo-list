@@ -84,35 +84,15 @@ public class CardService {
         double flag = 0;
         if (toColumnId == 1) {
             List<Double> flags = new ArrayList<>(cardRepository.toDoFlag());
-            if (flags.size() == 0) {
-                flag = 1;
-            } else if (index == 1) {
-                flag = 0 + flags.get(0) / 2;
-            } else {
-                flag = (flags.get(index - 1) + flags.get(index - 2)) / 2;
-            }
+            flag = findFlag(flags, index);
         }
         if (toColumnId == 2) {
             List<Double> flags = new ArrayList<>(cardRepository.doingFlag());
-            if (flags.size() == 0) {
-                flag = 1;
-            } else if (index == 1) {
-                flag = 0 + flags.get(0) / 2;
-            } else {
-                flag = (flags.get(index - 1) + flags.get(index - 2)) / 2;
-            }
-
+            flag = findFlag(flags, index);
         }
         if (toColumnId == 3) {
             List<Double> flags = new ArrayList<>(cardRepository.doneFlag());
-            if (flags.size() == 0) {
-                flag = 1;
-            } else if (index == 1) {
-                flag = 0 + flags.get(0) / 2;
-            } else {
-                flag = (flags.get(index - 1) + flags.get(index - 2)) / 2;
-            }
-
+            flag = findFlag(flags, index);
         }
         Long fromColumnId = card.getColumnId();
         card.move(toColumnId, flag);
@@ -128,6 +108,18 @@ public class CardService {
     public void createHistory(String action, String title, Long fromColumnId, Long toColumnId) {
         History history = new History(action, title, fromColumnId, toColumnId);
         historyRepository.save(history);
+    }
+
+    private Double findFlag(List<Double> flags, int index) {
+        double flag = 0;
+        if (flags.size() == 0) {
+            flag = 1;
+        } else if (index == 1) {
+            flag = 0 + flags.get(0) / 2;
+        } else {
+            flag = (flags.get(index - 1) + flags.get(index - 2)) / 2;
+        }
+        return flag;
     }
 
 }
