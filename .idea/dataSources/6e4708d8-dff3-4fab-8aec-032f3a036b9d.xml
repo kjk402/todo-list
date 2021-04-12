@@ -925,34 +925,42 @@ APPLICATION_PASSWORD_ADMIN,AUDIT_ADMIN,BACKUP_ADMIN,BINLOG_ADMIN,BINLOG_ENCRYPTI
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <key id="289" parent="283" name="PRIMARY">
+    <column id="289" parent="283" name="flag">
+      <Position>5</Position>
+      <DataType>double|0s</DataType>
+    </column>
+    <key id="290" parent="283" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="290" parent="284" name="id">
+    <column id="291" parent="284" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="291" parent="284" name="action">
+    <column id="292" parent="284" name="action">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
     </column>
-    <column id="292" parent="284" name="title">
+    <column id="293" parent="284" name="title">
       <Position>3</Position>
       <DataType>varchar(45)|0s</DataType>
     </column>
-    <column id="293" parent="284" name="fromId">
+    <column id="294" parent="284" name="from_column_id">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="294" parent="284" name="toId">
+    <column id="295" parent="284" name="to_column_id">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <key id="295" parent="284" name="PRIMARY">
+    <column id="296" parent="284" name="created_time">
+      <Position>6</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <key id="297" parent="284" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

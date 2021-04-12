@@ -5,9 +5,12 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Table("HISTORY")
 public class History {
+    private static final DateTimeFormatter FORMATTER_PATTERN = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
     @Id
     private Long id;
 
@@ -20,6 +23,9 @@ public class History {
     @Column("to_column_id")
     private Long toColumnId;
 
+    @Column("created_time")
+    private LocalDateTime createdTime = LocalDateTime.now();
+
     public History() {
 
     }
@@ -29,6 +35,7 @@ public class History {
         this.title = title;
         this.fromColumnId = fromColumnId;
         this.toColumnId = toColumnId;
+        this.createdTime = createdTime;
     }
 
     public Long getId() {
@@ -44,5 +51,9 @@ public class History {
     public Long getFromColumnId() { return fromColumnId;}
 
     public Long getToColumnId() {return toColumnId;}
+
+    public String getCreatedTime() {
+        return createdTime.format(FORMATTER_PATTERN);
+    }
 
 }

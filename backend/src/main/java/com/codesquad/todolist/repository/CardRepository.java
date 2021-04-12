@@ -19,4 +19,13 @@ public interface CardRepository extends CrudRepository<Card, Long> {
 
     @Query("SELECT * FROM CARD WHERE CARD.COLUMN_ID = 3")
     List<Card> findDoneCards();
+
+    @Query("SELECT FLAG FROM CARD WHERE CARD.COLUMN_ID = 1 ORDER BY FLAG ASC")
+    List<Double> toDoFlag();
+
+    @Query("SELECT FLAG FROM CARD WHERE CARD.COLUMN_ID = 2 ORDER BY FLAG ASC")
+    List<Double> doingFlag();
+
+    @Query("SELECT FLAG FROM CARD WHERE CARD.COLUMN_ID = 3 ORDER BY FLAG ASC")
+    List<Double> doneFlag();
 }

@@ -17,11 +17,13 @@ public class Card {
     private String contents;
 //    private LocalDateTime createDateTime = LocalDateTime.now();
     private Long columnId;
+    private Double flag;
 
-    public Card(String title, String contents, Long columnId) {
+    public Card(String title, String contents, Long columnId, Double flag) {
         this.title = title;
         this.contents = contents;
         this.columnId = columnId;
+        this.flag = flag;
     }
 
     public void update(String title, String contents){
@@ -29,8 +31,9 @@ public class Card {
         this.contents = contents;
     }
 
-    public void move(Long columnId) {
+    public void move(Long columnId, Double flag) {
         this.columnId = columnId;
+        this.flag = flag;
     }
 
     public Long getId() {
@@ -46,6 +49,8 @@ public class Card {
     }
 
     public Long getColumnId() { return columnId;}
+
+    public Double getFlag() {return flag;}
 
 //    public String getCreateDateTime() {
 //        return createDateTime.format(FORMATTER_PATTERN);

@@ -16,6 +16,6 @@ CREATE TABLE history
   id  int primary key auto_increment,
   action        varchar(45),
   title         varchar(45),
-  fromId     int,
-  toId       int
+  from_column_id     int,
+  to_column_id       int
 );
