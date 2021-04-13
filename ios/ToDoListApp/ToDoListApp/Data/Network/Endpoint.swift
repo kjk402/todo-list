@@ -40,7 +40,6 @@ extension Endpoint {
     
     //POST용
     static func add(columnId: Int) -> Self {
-        print(Endpoint(path: "/cards/\(columnId+1)").url)
         return Endpoint(path: "/cards/\(columnId+1)")
     }
     
@@ -54,7 +53,8 @@ extension Endpoint {
     }
     
     static func update(id: Int) -> Self {
-        return Endpoint(path: "/update\(id)")
+        print(Endpoint(path: "/update/\(id)"))
+        return Endpoint(path: "/update/\(id)")
     }
     
     static func move(state: State) -> Self {

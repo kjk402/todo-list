@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class MainCell: UICollectionViewCell {
     static let identifier = "MainCell"
@@ -42,6 +43,8 @@ class MainCell: UICollectionViewCell {
             inputViewController.modalPresentationStyle = .overCurrentContext
             inputViewController.setupMode("edit")
             inputViewController.setupId(self.board?.getBoard().getCards()[indexPath.row].getId() ?? 0)
+            inputViewController.setupwillEditCard(self.board?.getBoard().getCards()[indexPath.row] as! CardManageable)
+            inputViewController.setupCardViewModel(CardViewModel())
             self.window?.rootViewController?.present(inputViewController, animated: false, completion: .none)
         }
         

@@ -40,7 +40,6 @@ class MainViewController: UIViewController {
     }
 }
 
-
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.cardViewModel.boards.count

@@ -36,8 +36,9 @@ class Card: CardManageable, Codable {
     func add() {
     }
     
-    func edit() {
-        
+    func edit(title: String, contents: String) {
+        self.title = title
+        self.contents = contents
     }
     
     func delete() {

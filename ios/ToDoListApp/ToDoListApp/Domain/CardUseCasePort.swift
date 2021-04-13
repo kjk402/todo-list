@@ -10,7 +10,7 @@ import Combine
 
 protocol CardManageable {
     func add()
-    func edit()
+    func edit(title: String, contents: String)
     func delete()
     func goToDone()
     func getTitle() -> String

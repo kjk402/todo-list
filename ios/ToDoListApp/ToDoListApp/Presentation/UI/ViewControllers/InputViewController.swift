@@ -20,6 +20,7 @@ class InputViewController: UIViewController {
     private var mode: String?
     private var columnId: Int?
     private var id: Int?
+    private var willEditCard: CardManageable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +45,10 @@ class InputViewController: UIViewController {
         self.columnId = columnId
     }
     
+    func setupwillEditCard(_ willEditCard: CardManageable) {
+        self.willEditCard = willEditCard
+    }
+    
     func setupId(_ id: Int) {
         self.id = id
     }
@@ -53,7 +58,7 @@ class InputViewController: UIViewController {
         cardViewModel?.addEventListener(loadData: loadDataSubject.eraseToAnyPublisher(), columnId: self.columnId ?? 0)
         }
         else {
-            cardViewModel?.editEventListener(loadData: loadDataSubject.eraseToAnyPublisher(), columnId: self.columnId ?? 0, id: self.id ?? 0)
+            cardViewModel?.editEventListener(loadData: loadDataSubject.eraseToAnyPublisher(), willEditCard: willEditCard!, toBeTitle: inputTextFields[0].text!, toBeContents: inputTextFields[1].text!)
         }
     }
     
@@ -63,5 +68,6 @@ class InputViewController: UIViewController {
     
     @IBAction func enrollmentButtonTapped(_ sender: UIButton) {
         loadDataSubject.send()
+        print("edit")
     }
 }
