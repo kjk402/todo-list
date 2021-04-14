@@ -13,7 +13,6 @@ protocol CardFactory {
 
 class ToDo: BoardManageable, CardFactory {
 
-    
     private var board: Board
     private let title = "해야하는 일"
     

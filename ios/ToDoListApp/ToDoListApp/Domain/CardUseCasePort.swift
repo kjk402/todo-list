@@ -9,6 +9,11 @@ import Foundation
 import Combine
 
 protocol CardManageable {
+
+    func add()
+    func edit(title: String, contents: String)
+    func delete()
+    func goToDone()
     func getTitle() -> String
     func getContents() -> String
     func getId() -> Int?

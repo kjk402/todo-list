@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class MainCell: UICollectionViewCell {
     static let identifier = "MainCell"

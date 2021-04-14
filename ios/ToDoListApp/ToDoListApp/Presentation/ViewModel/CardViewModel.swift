@@ -62,18 +62,18 @@ class CardViewModel {
             .store(in: &subscriptions)
     }
     
-    func editCard(columnId: Int, id: Int) {
-        cardUseCase.edit(id: id, title: "나는 수정될 카드야", contents: "잘부탁해")
+    func editCard(card: CardManageable, toBeTitle: String, toBeContents: String) {
+        cardUseCase.edit(id: card.getId()!, title: toBeTitle, contents: toBeContents)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { result in
                     switch result {
                     case .finished: print("finished")
                     case .failure(let error): print(error.localizedDescription) } },
                   receiveValue: { cards in
-                    print("editCard 성공")
-                    self.boards[columnId].editCard(cards.first!, index: id)
+                    print("editCard: \(cards)")
+                    card.edit(title: toBeTitle, contents: toBeContents)
                     self.reloadCardListSubject.send(.success(()))
-                    print(self.boards[columnId])
+                   
                   })
             .store(in: &subscriptions)
     }
@@ -85,20 +85,26 @@ class CardViewModel {
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in },
                   receiveValue: { [weak self] cards in
+                    print("addEventListener:  \(cards)")
                     self?.addCard(columnId: columnId)
                   })
             .store(in: &subscriptions)
     }
     
-    func editEventListener(loadData: AnyPublisher<Void, Never>, columnId: Int, id: Int) {
+    func editEventListener(loadData: AnyPublisher<Void, Never>, willEditCard: CardManageable, toBeTitle: String, toBeContents: String) {
         
         self.loadData = loadData
+        print(loadData)
         self.loadData
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in },
+            .sink(receiveCompletion: { result in
+                    switch result {
+                    case .finished: print("finished")
+                    case .failure(let error): print(error.localizedDescription) } },
                   receiveValue: { [weak self] cards in
-                    print("뷰모델입니다. \(cards)")
-                    self?.editCard(columnId: columnId, id: id)
+                    print("editEventListener: \(cards)")
+                    self?.editCard(card: willEditCard, toBeTitle: toBeTitle, toBeContents: toBeContents)
+                    self?.reloadCardListSubject.send(.success(()))
                   })
             .store(in: &subscriptions)
     }
