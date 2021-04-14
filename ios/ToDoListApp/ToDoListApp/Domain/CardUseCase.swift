@@ -9,11 +9,16 @@ import Foundation
 import Combine
 
 class CardUseCase: CardUseCasePort {
+    enum NotificationName {
+        static let didUpdateTextField = Notification.Name("didUpdateTextField")
+    }
+    
     private var card: CardManageable
     private var toDo: BoardManageable
     private var doing: BoardManageable
     private var done: BoardManageable
     private var cardNetworkManager: CardNetworkManagerProtocol
+    private var isEnabledInCardEnrollemnt = [false, false]
     
     init(card: CardManageable, toDo: BoardManageable, doing: BoardManageable, done: BoardManageable, cardNetworkManager: CardNetworkManagerProtocol) {
         self.card = card
@@ -42,5 +47,9 @@ class CardUseCase: CardUseCasePort {
     
     func edit(id: Int, title: String, contents: String) -> AnyPublisher<Card, Error> {
         return cardNetworkManager.putCard(id: id, title: title, contents: contents)
+    }
+    
+    func isEnabledCardEnrollemnt(count: Int) -> Bool {
+        return count > 0
     }
 }

@@ -38,6 +38,7 @@ extension TableViewDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
             cardViewModel?.boards[column].getBoard().removeCard(at: indexPath.row)
+            tableView.reloadData()
         }
     }
     

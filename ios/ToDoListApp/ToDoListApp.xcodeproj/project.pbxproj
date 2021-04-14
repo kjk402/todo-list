@@ -31,6 +31,7 @@
 		9386C0A826258913008645D9 /* TableviewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386C0A726258913008645D9 /* TableviewDelegate.swift */; };
 		9386C0AB26259426008645D9 /* TableViewDragDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386C0AA26259426008645D9 /* TableViewDragDelegate.swift */; };
 		9386C0AF26259697008645D9 /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386C0AE26259697008645D9 /* TableViewDataSource.swift */; };
+		9386C0B52626C69F008645D9 /* TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386C0B42626C69F008645D9 /* TextFieldDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		9386C0A726258913008645D9 /* TableviewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableviewDelegate.swift; sourceTree = "<group>"; };
 		9386C0AA26259426008645D9 /* TableViewDragDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDragDelegate.swift; sourceTree = "<group>"; };
 		9386C0AE26259697008645D9 /* TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDataSource.swift; sourceTree = "<group>"; };
+		9386C0B42626C69F008645D9 /* TextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				9386C0A726258913008645D9 /* TableviewDelegate.swift */,
 				9386C0AA26259426008645D9 /* TableViewDragDelegate.swift */,
 				9386C0AE26259697008645D9 /* TableViewDataSource.swift */,
+				9386C0B42626C69F008645D9 /* TextFieldDelegate.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				9348A4B1261D87F5002B63C6 /* CardViewModel.swift in Sources */,
 				9386C0AB26259426008645D9 /* TableViewDragDelegate.swift in Sources */,
 				9386C07F261F068C008645D9 /* ToDo.swift in Sources */,
+				9386C0B52626C69F008645D9 /* TextFieldDelegate.swift in Sources */,
 				9386C0A826258913008645D9 /* TableviewDelegate.swift in Sources */,
 				9386C082261F0717008645D9 /* Doing.swift in Sources */,
 				9386C08C26216D3D008645D9 /* InputViewController.swift in Sources */,

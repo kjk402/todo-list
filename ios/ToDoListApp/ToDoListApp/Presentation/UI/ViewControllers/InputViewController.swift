@@ -12,9 +12,17 @@ class InputViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var enrollmentButton: UIButton!
-    @IBOutlet var inputTextFields: [UITextField]!
+    @IBOutlet var inputTextFields: [UITextField]! {
+        didSet {
+            inputTextFields.forEach { textField in
+                textField.delegate = textFieldDelegate
+            }
+        }
+    }
     
     private var loadDataSubject = PassthroughSubject<Void,Never>()
+    private var textFieldPublisher: AnyCancellable!
+    private var textFieldDelegate = TextFieldDelegate()
     private var cardViewModel: CardViewModel?
     private var mode: String?
     private var columnId: Int?
@@ -23,7 +31,20 @@ class InputViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        enrollmentButton.isEnabled = false
+        enrollmentButton.backgroundColor = .systemGray5
         setupTitle()
+        setTextFieldSubscriber()
+    }
+    
+    private func setTextFieldSubscriber() {
+        textFieldPublisher = NotificationCenter.default
+            .publisher(for: CardUseCase.NotificationName.didUpdateTextField)
+            .sink { notification in
+                DispatchQueue.main.async {
+                    self.isEnableEnrollment(notification)
+                }
+            }
     }
     
     private func setupTitle() {
@@ -53,10 +74,22 @@ class InputViewController: UIViewController {
     
     func bind() {
         if mode == "add" {
-        cardViewModel?.addEventListener(loadData: loadDataSubject.eraseToAnyPublisher(), columnId: self.columnId ?? 0)
-        }
-        else {
+            cardViewModel?.addEventListener(loadData: loadDataSubject.eraseToAnyPublisher(), columnId: self.columnId ?? 0)
+        } else {
             cardViewModel?.editEventListener(loadData: loadDataSubject.eraseToAnyPublisher(), willEditCard: willEditCard!, toBeTitle: inputTextFields[0].text!, toBeContents: inputTextFields[1].text!)
+        }
+    }
+    
+    private func isEnableEnrollment(_ notification: Notification) {
+        guard let dict = notification.userInfo as Dictionary? else { return }
+        if let count = dict["textCount"] as? Int {
+            if self.cardViewModel?.isEnabledCardEnrollemnt(count: count) ?? false {
+                self.enrollmentButton.isEnabled = true
+                enrollmentButton.backgroundColor = .systemBlue
+            } else {
+                self.enrollmentButton.isEnabled = false
+                enrollmentButton.backgroundColor = .systemGray5
+            }
         }
     }
     

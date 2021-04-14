@@ -27,6 +27,10 @@ class CardViewModel {
         self.init(cardUseCase: cardUseCase)
     }
     
+    func isEnabledCardEnrollemnt(count: Int) -> Bool {
+        return self.cardUseCase.isEnabledCardEnrollemnt(count: count)
+    }
+    
     private func configureBoard(type: CardFactory.Type, cards: AnyPublisher<[Card], Error>) {
         cards
             .receive(on: DispatchQueue.main)
