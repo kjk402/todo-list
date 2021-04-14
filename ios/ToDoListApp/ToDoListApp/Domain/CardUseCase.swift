@@ -36,11 +36,11 @@ class CardUseCase: CardUseCasePort {
         return cardNetworkManager.getCards(state: state)
     }
  
-    func add(columnId: Int, title: String, contents: String) -> AnyPublisher<[Card], Error>  {
+    func add(columnId: Int, title: String, contents: String) -> AnyPublisher<Card, Error>  {
         return cardNetworkManager.postCard(columnId: columnId, title: title, contents: contents)
     }
     
-    func edit(id: Int, title: String, contents: String) -> AnyPublisher<[Card], Error> {
+    func edit(id: Int, title: String, contents: String) -> AnyPublisher<Card, Error> {
         return cardNetworkManager.putCard(id: id, title: title, contents: contents)
     }
 }

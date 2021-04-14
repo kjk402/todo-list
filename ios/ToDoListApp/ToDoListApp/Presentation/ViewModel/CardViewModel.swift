@@ -55,8 +55,8 @@ class CardViewModel {
                     switch result {
                     case .finished: print("finished")
                     case .failure(let error): print(error.localizedDescription) } },
-                  receiveValue: { cards in
-                    self.boards[columnId].appendCard(cards.first!)
+                  receiveValue: { card in
+                    self.boards[columnId].appendCard(card)
                     self.reloadCardListSubject.send(.success(()))
                   })
             .store(in: &subscriptions)

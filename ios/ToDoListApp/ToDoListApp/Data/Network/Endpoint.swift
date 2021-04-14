@@ -19,8 +19,8 @@ extension Endpoint {
     var url: URL {
         var components = URLComponents()
         components.scheme = "http"
-        components.host = "localhost"
-        components.port = 3000
+        components.host = "ec2-3-36-241-44.ap-northeast-2.compute.amazonaws.com"
+        components.port = 8080
         components.path = "\(path)"
 
         guard let url = components.url else {
@@ -35,12 +35,12 @@ extension Endpoint {
 
     //GET용
     static func cards(state: State) -> Self {
-        return Endpoint(path: "/cards/\(state.rawValue)")
+        return Endpoint(path: "/card/\(state.rawValue)")
     }
     
     //POST용
     static func add(columnId: Int) -> Self {
-        return Endpoint(path: "/cards/\(columnId+1)")
+        return Endpoint(path: "/card/\(columnId+1)")
     }
     
     static func remove(state: State) -> Self {
@@ -53,8 +53,8 @@ extension Endpoint {
     }
     
     static func update(id: Int) -> Self {
-        print(Endpoint(path: "/update/\(id)").url)
-        return Endpoint(path: "/update/\(id)")
+        print(Endpoint(path: "/card/\(id)").url)
+        return Endpoint(path: "/card/\(id)")
     }
     
     static func move(state: State) -> Self {
