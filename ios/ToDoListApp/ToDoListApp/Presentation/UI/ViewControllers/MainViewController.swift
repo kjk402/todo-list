@@ -35,11 +35,11 @@ class MainViewController: UIViewController {
             .sink(receiveCompletion: { completion in
             }) { [weak self] _ in
                 self?.collectionView?.reloadData()
+                print("리로드")
             }
             .store(in: &subsciptions)
     }
 }
-
 
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -37,6 +37,8 @@ class TableViewDelegate: NSObject {
         inputViewController.modalPresentationStyle = .overCurrentContext
         inputViewController.setupMode("edit")
         inputViewController.setupId(self.cardViewModel?.boards[self.column].getBoard().getCards()[indexPath.row].getId() ?? 0)
+        inputViewController.setupCardViewModel(self.cardViewModel)
+        inputViewController.setupWillEditCard(self.cardViewModel?.boards[self.column].getBoard().getCards()[indexPath.row] as! CardManageable)
         let rootViewController = UIApplication.shared.keyWindow?.rootViewController
         rootViewController?.present(inputViewController, animated: false, completion: .none)
     }
