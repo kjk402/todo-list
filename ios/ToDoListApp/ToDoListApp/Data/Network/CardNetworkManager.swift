@@ -42,6 +42,6 @@ class CardNetworkManager: CardNetworkManagerProtocol {
     func putCard(id: Int, title: String, contents: String) -> AnyPublisher<[Card], Error> {
         let endpoint = Endpoint.update(id: id)
         
-        return networkManager.post(title: title, contents: contents, url: endpoint.url)
+        return networkManager.put(title: title, contents: contents, url: endpoint.url)
     }
 }

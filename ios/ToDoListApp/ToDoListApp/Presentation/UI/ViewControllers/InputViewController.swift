@@ -15,7 +15,6 @@ class InputViewController: UIViewController {
     @IBOutlet var inputTextFields: [UITextField]!
     
     private var loadDataSubject = PassthroughSubject<Void,Never>()
-    private var subsciptions = Set<AnyCancellable>()
     private var cardViewModel: CardViewModel?
     private var mode: String?
     private var columnId: Int?
@@ -24,7 +23,6 @@ class InputViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         setupTitle()
     }
     
@@ -67,6 +65,7 @@ class InputViewController: UIViewController {
     }
     
     @IBAction func enrollmentButtonTapped(_ sender: UIButton) {
+        bind()
         loadDataSubject.send()
         print("edit")
     }
