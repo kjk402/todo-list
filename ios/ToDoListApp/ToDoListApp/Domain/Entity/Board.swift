@@ -48,11 +48,4 @@ class Board {
     func editCard(at index: Int, for card: CardManageable) {
         self.cards[index] = card
     }
-//    func getBoard() -> Board {
-//        return Board()
-//    }
-//    
-//    func getTitle() -> String {
-//        return ""
-//    }
 }

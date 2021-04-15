@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-protocol CardManageable {
+protocol CardManageable: Decodable {
     func add()
     func edit(title: String, contents: String)
     func delete()

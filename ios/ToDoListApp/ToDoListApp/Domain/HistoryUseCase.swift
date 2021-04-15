@@ -20,7 +20,7 @@ class HistoryUseCase: HistoryUseCasePort {
         self.init(historyNetworkManager: historyNetworkManager)
     }
     
-    func get() -> AnyPublisher<[History], Error> {
+    func get() -> AnyPublisher<Histories, Error> {
         return historyNetworkManager.getHistories()
     }
 }

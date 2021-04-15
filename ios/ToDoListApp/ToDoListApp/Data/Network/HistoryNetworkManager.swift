@@ -11,7 +11,7 @@ import Combine
 protocol HistoryNetworkManagerProtocol: class {
     var networkManager: HttpMethodProtocol { get }
 
-    func getHistories() -> AnyPublisher<[History], Error>
+    func getHistories() -> AnyPublisher<Histories, Error>
 }
 
 class HistoryNetworkManager: HistoryNetworkManagerProtocol {
@@ -26,8 +26,8 @@ class HistoryNetworkManager: HistoryNetworkManagerProtocol {
         self.init(networkManager: networkManager)
     }
     
-    func getHistories() -> AnyPublisher<[History], Error> {
+    func getHistories() -> AnyPublisher<Histories, Error> {
         let endpoint = Endpoint.histories()
-        return networkManager.get(type: [History].self, url: endpoint.url)
+        return networkManager.getHistory(type: Histories.self, url: endpoint.url)
     }
 }

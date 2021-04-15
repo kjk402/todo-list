@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class HistoryViewModel {
-    @Published var histories: [History] = []
+    @Published var histories = Histories()
     private(set) var dataChanged = PassthroughSubject<Void, Never>()
     private var cancellables = Set<AnyCancellable>()
     private var historyUseCase: HistoryUseCasePort!

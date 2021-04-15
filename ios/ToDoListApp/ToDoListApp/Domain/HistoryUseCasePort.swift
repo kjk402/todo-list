@@ -9,5 +9,5 @@ import Foundation
 import Combine
 
 protocol HistoryUseCasePort {
-    func get() -> AnyPublisher<[History], Error>
+    func get() -> AnyPublisher<Histories, Error>
 }

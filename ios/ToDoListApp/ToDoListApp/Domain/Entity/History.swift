@@ -7,6 +7,27 @@
 
 import Foundation
 
+struct Histories: Decodable {
+    private var history: [History]
+    
+    init(history: [History]) {
+        self.history = history
+    }
+    
+    init() {
+        let history = [History]()
+        self.init(history: history)
+    }
+    
+    func count() -> Int {
+        return self.history.count
+    }
+    
+    func getHistory(index: Int) -> History {
+        return self.history[index]
+    }
+}
+
 class History: Codable, HistoryManageable {
     private var id: Int
     private var action: String

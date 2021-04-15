@@ -53,7 +53,7 @@ class HistoryCell: UICollectionViewCell {
             historyStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             historyStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             historyStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            historyStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 25)
+            historyStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 50)
         ])
     }
 }

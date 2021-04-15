@@ -13,7 +13,7 @@ class HistoryViewController: UIViewController {
     private var historyViewModel: HistoryViewModel!
     private var cancellables: Set<AnyCancellable> = []
     private var historyCellRegistration: UICollectionView.CellRegistration<HistoryCell, History>!
-    private let itemSize = (width: 300, height: 120)
+    private let itemSize = (width: 300, height: 150)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +33,6 @@ class HistoryViewController: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .white
         view.addSubview(collectionView)
-        
-        NSLayoutConstraint.activate([
-            self.collectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 120)
-        ])
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.dataSource = self
         
@@ -64,11 +60,11 @@ class HistoryViewController: UIViewController {
 
 extension HistoryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return historyViewModel.histories.count
+        return historyViewModel.histories.count()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let history = historyViewModel.histories[indexPath.row]
+        let history = historyViewModel.histories.getHistory(index: indexPath.row)
         return collectionView.dequeueConfiguredReusableCell(using: historyCellRegistration, for: indexPath, item: history)
     }
 }

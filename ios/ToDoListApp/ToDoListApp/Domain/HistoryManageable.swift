@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol HistoryManageable {
+protocol HistoryManageable: Decodable {
     func getTitle() -> String
     func getAction() -> String
     func getFromColumnId() -> Int
