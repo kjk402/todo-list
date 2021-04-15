@@ -15,13 +15,15 @@ class MainViewController: UIViewController {
     private var cardViewModel: CardViewModel!
     private var loadDataSubject = PassthroughSubject<Void,Never>()
     private var subsciptions = Set<AnyCancellable>()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
         self.cardViewModel = CardViewModel()
         cardViewModel.requestBoard()
         bind()
+        
+        
     }
     
     func bind() {
@@ -35,7 +37,6 @@ class MainViewController: UIViewController {
             .sink(receiveCompletion: { completion in
             }) { [weak self] _ in
                 self?.collectionView?.reloadData()
-                print("리로드")
             }
             .store(in: &subsciptions)
     }
@@ -64,6 +65,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         inputViewController.setupMode("add")
         inputViewController.setupCardViewModel(self.cardViewModel)
         inputViewController.setupColumnId(sender.tag)
+        print(sender.tag)
         present(inputViewController, animated: false, completion: nil)
     }
 }

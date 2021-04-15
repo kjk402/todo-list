@@ -14,9 +14,12 @@ protocol CardNetworkManagerProtocol: class {
     func getCards(state: State) -> AnyPublisher<[Card], Error>
     func postCard(columnId: Int, title: String, contents: String) -> AnyPublisher<Card, Error>
     func putCard(id: Int, title: String, contents: String) -> AnyPublisher<Card, Error>
+    func removeCard(id: Int) -> AnyPublisher<Int, NetworkError>
+    func move(id: Int, toColumnId: Int, toIndex: Int) -> AnyPublisher<Card, Error>
 }
 
 class CardNetworkManager: CardNetworkManagerProtocol {
+    
     var networkManager: HttpMethodProtocol
     
     init(networkManager: HttpMethodProtocol) {
@@ -43,5 +46,17 @@ class CardNetworkManager: CardNetworkManagerProtocol {
         let endpoint = Endpoint.update(id: id)
         
         return networkManager.put(title: title, contents: contents, url: endpoint.url)
+    }
+    
+    func removeCard(id: Int) -> AnyPublisher<Int, NetworkError> {
+        let endpoint = Endpoint.remove(id: id)
+        
+        return networkManager.delete(id: id, url: endpoint.url)
+    }
+    
+    func move(id: Int, toColumnId: Int, toIndex: Int) -> AnyPublisher<Card, Error> {
+        let endpoint = Endpoint.move(id: id, toColumn: toColumnId, toIndexOfColumn: toIndex)
+        
+        return networkManager.move(url: endpoint.url)
     }
 }

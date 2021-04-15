@@ -13,5 +13,7 @@ protocol BoardManageable {
     func count() -> Int
     func forEachCards(handler: (CardManageable) -> ())
     func appendCard(_ card: CardManageable)
+    func getColumn() -> Int
+    func insertCard(card: CardManageable, at destinationIndex: Int) 
     //func editCard(title: String, contents: String)
 }

@@ -10,8 +10,8 @@ import Foundation
 class Card: CardManageable, Codable {
     
     private var id: Int?
-    private var title: String
-    private var contents: String
+    private var title: String?
+    private var contents: String?
     private var columnId: Int?
     private var createdTime: String?
     private var flag: Double?
@@ -52,15 +52,15 @@ class Card: CardManageable, Codable {
     }
     
     func goToDone() {
-        
+        self.columnId = 3
     }
     
     func getTitle() -> String {
-        return self.title
+        return self.title ?? "타이틀 가져오기 실패"
     }
     
     func getContents() -> String {
-        return self.contents
+        return self.contents ?? "content 가져오기 실패"
     }
     
     func getId() -> Int? {

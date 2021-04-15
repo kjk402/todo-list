@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 class CardUseCase: CardUseCasePort {
+    
     private var card: CardManageable
     private var toDo: BoardManageable
     private var doing: BoardManageable
@@ -42,5 +43,13 @@ class CardUseCase: CardUseCasePort {
     
     func edit(id: Int, title: String, contents: String) -> AnyPublisher<Card, Error> {
         return cardNetworkManager.putCard(id: id, title: title, contents: contents)
+    }
+    
+    func remove(id: Int) -> AnyPublisher<Int, NetworkError> {
+        return cardNetworkManager.removeCard(id: id)
+    }
+    
+    func move(id: Int, toColumnId: Int, toIndex: Int) -> AnyPublisher<Card, Error> {
+        return cardNetworkManager.move(id: id, toColumnId: toColumnId, toIndex: toIndex)
     }
 }

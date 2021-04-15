@@ -43,30 +43,20 @@ extension Endpoint {
         return Endpoint(path: "/card/\(columnId+1)")
     }
     
-    static func remove(state: State) -> Self {
-        return Endpoint(path: "/remove",
-                        queryItems: [
-                            URLQueryItem(name: "\(state.rawValue)",
-                                         value: "\(state.rawValue)_id")
-                        ]
-        )
-    }
-    
-    static func update(id: Int) -> Self {
+    static func remove(id: Int) -> Self {
         print(Endpoint(path: "/card/\(id)").url)
         return Endpoint(path: "/card/\(id)")
     }
     
-    static func move(state: State) -> Self {
-        return Endpoint(path: "/move",
-                        queryItems: [
-                            URLQueryItem(name: "\(state.rawValue)",
-                                         value: "\(state.rawValue)_id")
-                        ]
-        )
+    static func update(id: Int) -> Self {
+        return Endpoint(path: "/card/\(id)")
+    }
+    
+    static func move(id: Int, toColumn: Int, toIndexOfColumn: Int) -> Self {
+        print(Endpoint(path: "/card/\(id)/move/\(toColumn)/\(toIndexOfColumn+1)").url)
+        return Endpoint(path: "/card/\(id)/move/\(toColumn)/\(toIndexOfColumn+1)")
     }
 }
-
 enum State: Int {
     case todo = 1
     case doing = 2
@@ -76,3 +66,4 @@ enum State: Int {
         return rawValue
     }
 }
+

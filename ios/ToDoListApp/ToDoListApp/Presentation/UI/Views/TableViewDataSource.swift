@@ -6,10 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 class TableViewDataSource: NSObject {
     private var cardViewModel: CardViewModel!
     private var column: Int!
+    
+    private var loadDataSubject = PassthroughSubject<Void,Never>()
+    private var subsciptions = Set<AnyCancellable>()
     
     init(cardViewModel: CardViewModel, column: Int) {
         self.cardViewModel = cardViewModel
@@ -35,9 +39,18 @@ extension TableViewDataSource: UITableViewDataSource {
         return true
     }
     
+    func bind(for willDeleteCard: CardManageable, indexOfColumn: Int) {
+        cardViewModel?.removeEventListener(loadData: loadDataSubject.eraseToAnyPublisher(), willRemoveCardColumnId: column, willRemoveCard: willDeleteCard, indexOfColumn: indexOfColumn)
+        
+    }
+        
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            cardViewModel?.boards[column].getBoard().removeCard(at: indexPath.row)
+            guard let card = cardViewModel?.boards[column].getBoard().getCards()[indexPath.row] else {
+                return
+            }
+            bind(for: card, indexOfColumn: indexPath.row)
+            loadDataSubject.send()
         }
     }
     
