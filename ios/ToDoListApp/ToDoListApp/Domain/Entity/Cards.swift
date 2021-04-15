@@ -1,5 +1,5 @@
 //
-//  Board.swift
+//  Cards.swift
 //  ToDoListApp
 //
 //  Created by zombietux on 2021/04/12.
@@ -7,10 +7,10 @@
 
 import Foundation
 
-class Board {
-    private var cards: [CardManageable]
+class Cards: Codable {
+    private var cards: [Card]
     
-    init(cards: [CardManageable]) {
+    init(cards: [Card]) {
         self.cards = cards
     }
     
@@ -23,17 +23,11 @@ class Board {
         return self.cards.count
     }
     
-    func forEachCards(handler: (CardManageable) -> ()) {
-        cards.forEach { card in
-            handler(card)
-        }
-    }
-    
-    func getCards() -> [CardManageable] {
+    func getCards() -> [Card] {
         return self.cards
     }
     
-    func appendCard(_ card: CardManageable) {
+    func appendCard(_ card: Card) {
         self.cards.append(card)
     }
     
@@ -41,11 +35,11 @@ class Board {
         self.cards.remove(at: index)
     }
     
-    func insertCard(card: CardManageable, at destinationIndex: Int) {
+    func insertCard(card: Card, at destinationIndex: Int) {
         self.cards.insert(card, at: destinationIndex)
     }
     
-    func editCard(at index: Int, for card: CardManageable) {
+    func editCard(at index: Int, for card: Card) {
         self.cards[index] = card
     }
 }

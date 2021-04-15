@@ -37,7 +37,7 @@ class CardUseCase: CardUseCasePort {
         self.init(card: card, toDo: toDo, doing: doing, done: done, cardNetworkManager: cardNetworkManager)
     }
 
-    func get(state: State) -> AnyPublisher<[Card], Error> {
+    func get(state: State) -> AnyPublisher<Cards, Error> {
         return cardNetworkManager.getCards(state: state)
     }
  

@@ -10,14 +10,14 @@ import Combine
 
 protocol HttpMethodProtocol: class {
 
-    func get<T>(type: [T].Type, url: URL) -> AnyPublisher<[T], Error> where T: Decodable
+    func get<T>(type: T.Type, url: URL) -> AnyPublisher<T, Error> where T: Decodable
     func getHistory<T>(type: T.Type, url: URL) -> AnyPublisher<T, Error> where T: Decodable
     func post<T>(title: String, contents: String, url: URL) -> AnyPublisher<T, Error> where T: Decodable
     func put<T>(title: String, contents: String, url: URL) -> AnyPublisher<T, Error> where T: Decodable
 }
 
 final class NetworkManager: HttpMethodProtocol {
-    func getHistory<T>(type: T.Type, url: URL) -> AnyPublisher<T, Error> where T : Decodable {
+    func get<T>(type: T.Type, url: URL) -> AnyPublisher<T, Error> where T : Decodable {
         let urlRequest = URLRequest(url: url)
         
         return URLSession.shared.dataTaskPublisher(for: urlRequest)
@@ -26,11 +26,7 @@ final class NetworkManager: HttpMethodProtocol {
             .eraseToAnyPublisher()
     }
     
-    
-    func get<T>(type: T.Type,
-                url: URL
-    ) -> AnyPublisher<T, Error> where T : Decodable {
-        
+    func getHistory<T>(type: T.Type, url: URL) -> AnyPublisher<T, Error> where T : Decodable {
         let urlRequest = URLRequest(url: url)
         
         return URLSession.shared.dataTaskPublisher(for: urlRequest)

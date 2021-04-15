@@ -8,9 +8,8 @@
 import Foundation
 
 protocol BoardManageable {
-    func getBoard() -> Board
+    func getBoard() -> Cards
     func getTitle() -> String
     func count() -> Int
-    func forEachCards(handler: (CardManageable) -> ())
-    func appendCard(_ card: CardManageable)
+    func appendCard(_ card: Card)
 }
