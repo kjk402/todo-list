@@ -11,6 +11,7 @@ import Combine
 class MainViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var historyView: UIView!
     
     private var cardViewModel: CardViewModel!
     private var loadDataSubject = PassthroughSubject<Void,Never>()
@@ -19,6 +20,8 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
+        view.addSubview(historyView)
+        self.historyView.isHidden = true
         self.cardViewModel = CardViewModel()
         cardViewModel.requestBoard()
         bind()
@@ -35,9 +38,16 @@ class MainViewController: UIViewController {
             .sink(receiveCompletion: { completion in
             }) { [weak self] _ in
                 self?.collectionView?.reloadData()
-                print("리로드")
             }
             .store(in: &subsciptions)
+    }
+    
+    @IBAction func historyViewOpenButtonTapped(_ sender: Any) {
+        self.historyView.isHidden = false
+    }
+    
+    @IBAction func historyViewCloseButtonTaeppd(_ sender: Any) {
+        self.historyView.isHidden = true
     }
 }
 
