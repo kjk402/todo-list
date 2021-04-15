@@ -6,3 +6,8 @@
 //
 
 import Foundation
+import Combine
+
+protocol HistoryUseCasePort {
+    func get() -> AnyPublisher<[History], Error>
+}
