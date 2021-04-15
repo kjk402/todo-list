@@ -38,6 +38,10 @@ extension Endpoint {
         return Endpoint(path: "/card/\(state.rawValue)")
     }
     
+    static func histories() -> Self {
+        return Endpoint(path: "/history")
+    }
+    
     //POST용
     static func add(columnId: Int) -> Self {
         return Endpoint(path: "/card/\(columnId+1)")
@@ -53,7 +57,6 @@ extension Endpoint {
     }
     
     static func update(id: Int) -> Self {
-        print(Endpoint(path: "/card/\(id)").url)
         return Endpoint(path: "/card/\(id)")
     }
     

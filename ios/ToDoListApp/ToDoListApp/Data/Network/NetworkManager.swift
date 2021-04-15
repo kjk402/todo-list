@@ -34,8 +34,7 @@ final class NetworkManager: HttpMethodProtocol {
         var request = URLRequest(url: url)
         
         request.httpMethod = "POST"
-        
-//        let body = try? JSONEncoder().encode(Card(title: title, contents: contents))
+    
         let json: [String: Any] = ["title": title,
                                    "contents": contents
                                   ]
@@ -43,7 +42,6 @@ final class NetworkManager: HttpMethodProtocol {
         let body = try? JSONSerialization.data(withJSONObject: json)
 
         request.httpBody = body
-//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         
         return URLSession.shared.dataTaskPublisher(for: request)
