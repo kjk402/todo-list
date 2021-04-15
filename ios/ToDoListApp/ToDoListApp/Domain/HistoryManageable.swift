@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+protocol HistoryManageable {
+    func getTitle() -> String
+    func getAction() -> String
+    func getFromColumnId() -> Int
+    func getToColumnId() -> Int
+}
