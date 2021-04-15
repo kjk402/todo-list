@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-protocol CardManageable: Decodable {
+protocol CardManageable: Codable {
     func add()
     func edit(title: String, contents: String)
     func delete()
@@ -23,4 +23,6 @@ protocol CardUseCasePort {
     func edit(id: Int, title: String, contents: String) -> AnyPublisher<Card, Error>
     func get(state: State) -> AnyPublisher<Cards, Error>
     func isEnabledCardEnrollemnt(count: Int) -> Bool
+    func remove(id: Int) -> AnyPublisher<Int, NetworkError>
+    func move(id: Int, toColumnId: Int, toIndex: Int) -> AnyPublisher<Card, Error>
 }

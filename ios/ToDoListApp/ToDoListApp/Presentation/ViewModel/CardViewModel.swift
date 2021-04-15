@@ -40,20 +40,22 @@ class CardViewModel {
                     case .failure(let error): print(error.localizedDescription) } },
                   receiveValue: { (cards) in
                     self.boards.append(type.self.makeBoard(cards: cards))
+                    self.boards.sort(by: { $0.getColumn() < $1.getColumn() })
                   })
             
             .store(in: &subscriptions)
     }
-    
+ 
     func requestBoard() {
-        boards.removeAll()
-        configureBoard(type: ToDo.self, cards: cardUseCase.get(state: .todo))
-        configureBoard(type: Doing.self, cards: CardNetworkManager().getCards(state: .doing))
-        configureBoard(type: Done.self, cards: CardNetworkManager().getCards(state: .done))
+        
+        self.configureBoard(type: ToDo.self, cards: self.cardUseCase.get(state: .todo))
+        self.configureBoard(type: Doing.self, cards: self.cardUseCase.get(state: .doing))
+        self.configureBoard(type: Done.self, cards: self.cardUseCase.get(state: .done))
     }
+
     
-    func addCard(columnId: Int) {
-        cardUseCase.add(columnId: columnId, title: "나는 더해질 카드야", contents: "잘부탁해")
+    func addCard(columnId: Int, title: String, contents: String) {
+        cardUseCase.add(columnId: columnId, title: title, contents: contents)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { result in
                     switch result {
@@ -73,8 +75,7 @@ class CardViewModel {
                     switch result {
                     case .finished: print("finished")
                     case .failure(let error): print(error.localizedDescription) } },
-                  receiveValue: { cards in
-                    print("editCard: \(cards)")
+                  receiveValue: { _ in
                     card.edit(title: toBeTitle, contents: toBeContents)
                     self.reloadCardListSubject.send(.success(()))
                    
@@ -82,7 +83,22 @@ class CardViewModel {
             .store(in: &subscriptions)
     }
     
-    func addEventListener(loadData: AnyPublisher<Void, Never>, columnId: Int) {
+    func removeCard(columnId: Int, card: CardManageable, index: Int) {
+        
+        cardUseCase.remove(id: card.getId() ?? 0)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { result in
+                    switch result {
+                    case .finished: print("finished")
+                    case .failure(let error): print(error.localizedDescription) } },
+                  receiveValue: { _ in
+                    self.boards[columnId].getBoard().removeCard(at: index ?? 0)
+                    self.reloadCardListSubject.send(.success(()))
+                  })
+            .store(in: &subscriptions)
+    }
+    
+    func addEventListener(loadData: AnyPublisher<Void, Never>, columnId: Int, title: String, contents: String) {
         
         self.loadData = loadData
         self.loadData
@@ -90,15 +106,14 @@ class CardViewModel {
             .sink(receiveCompletion: { _ in },
                   receiveValue: { [weak self] cards in
                     print("addEventListener:  \(cards)")
-                    self?.addCard(columnId: columnId)
+                    self?.addCard(columnId: columnId, title: title, contents: contents)
                   })
-            .store(in: &subscriptions)
-    }
-    
+                    .store(in: &subscriptions)
+            }
+            
     func editEventListener(loadData: AnyPublisher<Void, Never>, willEditCard: CardManageable, toBeTitle: String, toBeContents: String) {
         
         self.loadData = loadData
-        print(loadData)
         self.loadData
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { result in
@@ -108,7 +123,61 @@ class CardViewModel {
                   receiveValue: { [weak self] cards in
                     print("editEventListener: \(cards)")
                     self?.editCard(card: willEditCard, toBeTitle: toBeTitle, toBeContents: toBeContents)
-                    self?.reloadCardListSubject.send(.success(()))
+                  })
+            .store(in: &subscriptions)
+    }
+            
+    func removeEventListener(loadData: AnyPublisher<Void, Never>, willRemoveCardColumnId: Int, willRemoveCard: CardManageable, indexOfColumn: Int) {
+ 
+        subscriptions.removeAll()
+  
+        self.loadData = loadData
+        self.loadData
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { result in
+                    switch result {
+                    case .finished: print("finished")
+                    case .failure(let error): print(error.localizedDescription) } },
+                  receiveValue: { [weak self] card in
+                    print("removeEventListener: \(card)")
+                    self?.removeCard(columnId: willRemoveCardColumnId, card: willRemoveCard, index: indexOfColumn)
+                    
+                  })
+            .store(in: &subscriptions)
+    }
+    
+    func moveCard(_ card: CardManageable, beforeColumnId: Int, beforeIndex: Int ,toColumnId: Int, toIndex: Int) {
+        cardUseCase.move(id: card.getId() ?? 0, toColumnId: toColumnId, toIndex: toIndex)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { result in
+                    switch result {
+                    case .finished: print("finished")
+                    case .failure(let error): print(error.localizedDescription) } },
+                  receiveValue: { movedCard in
+                  print(movedCard)
+                    self.boards[toColumnId-1].insertCard(card: movedCard, at: toIndex)
+//                    self.boards[toColumnId-1].appendCard(movedCard)
+                    self.boards[beforeColumnId].getBoard().removeCard(at: beforeIndex ?? 0)
+                    self.reloadCardListSubject.send(.success(()))
+                  })
+            .store(in: &subscriptions)
+    }
+    
+    func moveEventListener(loadData: AnyPublisher<Void, Never>, willMoveCard: CardManageable, toColumnId: Int, toIndexOfColumn: Int) {
+ 
+        subscriptions.removeAll()
+        print(subscriptions.count)
+        self.loadData = loadData
+        self.loadData
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { result in
+                    switch result {
+                    case .finished: print("finished")
+                    case .failure(let error): print(error.localizedDescription) } },
+                  receiveValue: { [weak self] card in
+                    print("moveEventListener: \(card)")
+                    //self?.moveCard(willMoveCard, beforeIndex: <#Int#>, toColumnId: toColumnId, toIndex: toIndexOfColumn)
+                    
                   })
             .store(in: &subscriptions)
     }

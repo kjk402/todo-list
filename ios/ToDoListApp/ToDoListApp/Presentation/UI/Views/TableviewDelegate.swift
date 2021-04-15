@@ -18,6 +18,8 @@ class TableViewDelegate: NSObject {
     
     private func makeContextMenu(indexPath: IndexPath) -> UIMenu {
         let goToDone = UIAction(title: "완료한 일로 이동", image: .none) { action in
+            let card = self.cardViewModel?.boards[self.column].getBoard().getCards()[indexPath.row]
+            self.cardViewModel.moveCard(card as! CardManageable, beforeColumnId: self.column , beforeIndex: indexPath.row,  toColumnId: 3, toIndex: 0)
         }
         
         let edit = UIAction(title: "수정하기", image: .none) { action in

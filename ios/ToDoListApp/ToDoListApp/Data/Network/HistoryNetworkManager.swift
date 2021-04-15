@@ -28,6 +28,6 @@ class HistoryNetworkManager: HistoryNetworkManagerProtocol {
     
     func getHistories() -> AnyPublisher<Histories, Error> {
         let endpoint = Endpoint.histories()
-        return networkManager.getHistory(type: Histories.self, url: endpoint.url)
+        return networkManager.get(type: Histories.self, url: endpoint.url)
     }
 }

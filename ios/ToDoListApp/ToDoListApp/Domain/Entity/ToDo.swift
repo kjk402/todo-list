@@ -15,6 +15,7 @@ class ToDo: BoardManageable, CardFactory {
 
     private var board: Cards
     private let title = "해야하는 일"
+    private let column = 1
     
     init(board: Cards) {
         self.board = board
@@ -47,5 +48,14 @@ class ToDo: BoardManageable, CardFactory {
     
     static func makeBoard(cards: Cards) -> BoardManageable {
         return ToDo(board: cards)
+    }
+    
+    func getColumn() -> Int {
+        return self.column
+    }
+    
+    
+    func insertCard(card: Card, at destinationIndex: Int) {
+        self.board.insertCard(card: card, at: destinationIndex)
     }
 }

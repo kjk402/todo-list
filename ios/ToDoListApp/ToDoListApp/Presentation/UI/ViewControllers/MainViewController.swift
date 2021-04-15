@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     private var cardViewModel: CardViewModel!
     private var loadDataSubject = PassthroughSubject<Void,Never>()
     private var subsciptions = Set<AnyCancellable>()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
@@ -25,6 +25,8 @@ class MainViewController: UIViewController {
         self.cardViewModel = CardViewModel()
         cardViewModel.requestBoard()
         bind()
+        
+        
     }
     
     func bind() {
@@ -74,6 +76,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         inputViewController.setupMode("add")
         inputViewController.setupCardViewModel(self.cardViewModel)
         inputViewController.setupColumnId(sender.tag)
+        print(sender.tag)
         present(inputViewController, animated: false, completion: nil)
     }
 }

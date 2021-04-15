@@ -10,6 +10,7 @@ import Foundation
 class Done: BoardManageable, CardFactory {
     private var board: Cards
     private let title = "완료한 일"
+    private let column = 3
     
     init(board: Cards) {
         self.board = board
@@ -42,5 +43,13 @@ class Done: BoardManageable, CardFactory {
     
     static func makeBoard(cards: Cards) -> BoardManageable {
         return Done(board: cards)
+    }
+    
+    func getColumn() -> Int {
+        return self.column
+    }
+    
+    func insertCard(card: Card, at destinationIndex: Int) {
+        self.board.insertCard(card: card, at: destinationIndex)
     }
 }

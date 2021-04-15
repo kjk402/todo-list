@@ -52,4 +52,12 @@ class CardUseCase: CardUseCasePort {
     func isEnabledCardEnrollemnt(count: Int) -> Bool {
         return count > 0
     }
+    
+    func remove(id: Int) -> AnyPublisher<Int, NetworkError> {
+        return cardNetworkManager.removeCard(id: id)
+    }
+    
+    func move(id: Int, toColumnId: Int, toIndex: Int) -> AnyPublisher<Card, Error> {
+        return cardNetworkManager.move(id: id, toColumnId: toColumnId, toIndex: toIndex)
+    }
 }

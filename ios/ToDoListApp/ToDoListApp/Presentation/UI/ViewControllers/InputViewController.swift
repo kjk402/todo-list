@@ -74,7 +74,7 @@ class InputViewController: UIViewController {
     
     func bind() {
         if mode == "add" {
-            cardViewModel?.addEventListener(loadData: loadDataSubject.eraseToAnyPublisher(), columnId: self.columnId ?? 0)
+            cardViewModel?.addEventListener(loadData: loadDataSubject.eraseToAnyPublisher(), columnId: self.columnId ?? 0,  title: inputTextFields[0].text!, contents: inputTextFields[1].text!)
         } else {
             cardViewModel?.editEventListener(loadData: loadDataSubject.eraseToAnyPublisher(), willEditCard: willEditCard!, toBeTitle: inputTextFields[0].text!, toBeContents: inputTextFields[1].text!)
         }
