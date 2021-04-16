@@ -17,9 +17,10 @@ struct Endpoint {
         components.port = 8080
         components.path = "\(path)"
         
-          let url = components.url!
-        
-        return url
+        let url = components.url
+        assert(url == nil, "url is nil")
+
+        return url!
     }
 
     static func cards(state: CardState) -> Self {
