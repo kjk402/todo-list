@@ -18,7 +18,7 @@ struct Endpoint {
         components.path = "\(path)"
         
         let url = components.url
-        assert(url == nil, "url is nil")
+        assert(url != nil, "url is nil")
 
         return url!
     }

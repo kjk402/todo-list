@@ -10,8 +10,8 @@ import UIKit
 class TableViewDelegate: NSObject {
     enum Action {
         static let gotoDone = "완료한 일로 이동"
-        static let edit = "완료한 일로 이동"
-        static let delete = "완료한 일로 이동"
+        static let edit = "수정하기"
+        static let delete = "삭제하기"
     }
     
     private var cardViewModel: CardViewModel!

@@ -33,10 +33,9 @@ class CardViewModel {
     
     private func configureBoard(type: CardFactory.Type, cards: AnyPublisher<Cards, Error>) {
         cards
-            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { (result)
                     in switch result {
-                    case .finished: print("finished")
+                    case .finished: break
                     case .failure(let error): print(error.localizedDescription) } },
                   receiveValue: { (cards) in
                     self.boards.append(type.self.makeBoard(cards: cards))
@@ -59,7 +58,7 @@ class CardViewModel {
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { result in
                     switch result {
-                    case .finished: print("finished")
+                    case .finished: break
                     case .failure(let error): print(error.localizedDescription) } },
                   receiveValue: { card in
                     self.boards[columnId].appendCard(card)
@@ -73,7 +72,7 @@ class CardViewModel {
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { result in
                     switch result {
-                    case .finished: print("finished")
+                    case .finished: break
                     case .failure(let error): print(error.localizedDescription) } },
                   receiveValue: { _ in
                     card.edit(title: toBeTitle, contents: toBeContents)
@@ -89,10 +88,16 @@ class CardViewModel {
         cardUseCase.remove(id: card.getId() ?? 0)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { result in
-                    switch result {
-                    case .finished: print("finished")
-                    case .failure(let error): print(error.localizedDescription) } },
-                  receiveValue: { _ in
+                switch result {
+                case .finished: break
+                case .failure(let error):
+                    switch error {
+                    case .httpError: assertionFailure("서버 응답이 없습니다.")
+                    case .urlError: assertionFailure("url이 nil입니다.")
+                    }
+                }
+            },
+            receiveValue: { _ in
                     self.boards[columnId].getBoard().removeCard(at: index ?? 0)
                     self.reloadCardListSubject.send(.success(()))
                   })
@@ -103,7 +108,6 @@ class CardViewModel {
         
         self.loadData = loadData
         self.loadData
-            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in },
                   receiveValue: { [weak self] cards in
                     self?.addCard(columnId: columnId, title: title, contents: contents)
@@ -115,10 +119,9 @@ class CardViewModel {
         
         self.loadData = loadData
         self.loadData
-            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { result in
                     switch result {
-                    case .finished: print("finished")
+                    case .finished: break
                     case .failure(let error): print(error.localizedDescription) } },
                   receiveValue: { [weak self] cards in
                     self?.editCard(card: willEditCard, toBeTitle: toBeTitle, toBeContents: toBeContents)
@@ -132,13 +135,11 @@ class CardViewModel {
   
         self.loadData = loadData
         self.loadData
-            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { result in
                     switch result {
-                    case .finished: print("finished")
+                    case .finished: break
                     case .failure(let error): print(error.localizedDescription) } },
                   receiveValue: { [weak self] card in
-                    print("removeEventListener: \(card)")
                     self?.removeCard(card: willRemoveCard, columnId: willRemoveCardColumnId, index: indexOfColumn)
                     
                   })
@@ -150,7 +151,7 @@ class CardViewModel {
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { result in
                     switch result {
-                    case .finished: print("finished")
+                    case .finished: break
                     case .failure(let error): print(error.localizedDescription) } },
                   receiveValue: { movedCard in
                     self.boards[toColumnId-1].insertCard(card: movedCard, at: toIndex)

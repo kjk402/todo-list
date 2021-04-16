@@ -71,7 +71,6 @@ final class NetworkManager: HttpMethodProtocol {
         request.httpMethod = "DELETE"
 
         return URLSession.shared.dataTaskPublisher(for: request)
-    
             .tryMap{ data , response -> Int in
                 guard let httpResponse = response as? HTTPURLResponse else {
                     throw NetworkError.httpError
