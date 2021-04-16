@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E7999BB2628CA0800074872 /* MyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7999BA2628CA0800074872 /* MyTableView.swift */; };
 		933A1E7A261C387B0017FFBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933A1E79261C387B0017FFBD /* AppDelegate.swift */; };
 		933A1E7C261C387B0017FFBD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933A1E7B261C387B0017FFBD /* SceneDelegate.swift */; };
 		933A1E81261C387B0017FFBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933A1E7F261C387B0017FFBD /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E7999BA2628CA0800074872 /* MyTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableView.swift; sourceTree = "<group>"; };
 		933A1E76261C387B0017FFBD /* ToDoListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		933A1E79261C387B0017FFBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		933A1E7B261C387B0017FFBD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				9386C0AA26259426008645D9 /* TableViewDragDelegate.swift */,
 				9386C0AE26259697008645D9 /* TableViewDataSource.swift */,
 				9386C0B42626C69F008645D9 /* TextFieldDelegate.swift */,
+				1E7999BA2628CA0800074872 /* MyTableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E7999BB2628CA0800074872 /* MyTableView.swift in Sources */,
 				9386C06A261EE91F008645D9 /* NetworkManager.swift in Sources */,
 				9386C0C2262711B6008645D9 /* HistoryManageable.swift in Sources */,
 				9386C0B82626DC31008645D9 /* HistoryViewController.swift in Sources */,

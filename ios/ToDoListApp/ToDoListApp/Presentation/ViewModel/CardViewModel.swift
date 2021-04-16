@@ -12,7 +12,7 @@ class CardViewModel {
     private var cardUseCase: CardUseCasePort
     
     @Published var boards: [BoardManageable] = []
-  
+
     var reloadCardList: AnyPublisher<Result<Void, Error>, Never> { reloadCardListSubject.eraseToAnyPublisher() }
     private var subscriptions = Set<AnyCancellable>()
     private var loadData: AnyPublisher<Void, Never> = PassthroughSubject<Void, Never>().eraseToAnyPublisher()
@@ -83,7 +83,8 @@ class CardViewModel {
             .store(in: &subscriptions)
     }
     
-    func removeCard(columnId: Int, card: CardManageable, index: Int) {
+    func removeCard( card: CardManageable, columnId: Int, index: Int) {
+        subscriptions.removeAll()
         
         cardUseCase.remove(id: card.getId() ?? 0)
             .receive(on: DispatchQueue.main)
@@ -140,7 +141,7 @@ class CardViewModel {
                     case .failure(let error): print(error.localizedDescription) } },
                   receiveValue: { [weak self] card in
                     print("removeEventListener: \(card)")
-                    self?.removeCard(columnId: willRemoveCardColumnId, card: willRemoveCard, index: indexOfColumn)
+                    self?.removeCard(card: willRemoveCard, columnId: willRemoveCardColumnId, index: indexOfColumn)
                     
                   })
             .store(in: &subscriptions)
@@ -156,28 +157,8 @@ class CardViewModel {
                   receiveValue: { movedCard in
                   print(movedCard)
                     self.boards[toColumnId-1].insertCard(card: movedCard, at: toIndex)
-//                    self.boards[toColumnId-1].appendCard(movedCard)
                     self.boards[beforeColumnId].getBoard().removeCard(at: beforeIndex ?? 0)
                     self.reloadCardListSubject.send(.success(()))
-                  })
-            .store(in: &subscriptions)
-    }
-    
-    func moveEventListener(loadData: AnyPublisher<Void, Never>, willMoveCard: CardManageable, toColumnId: Int, toIndexOfColumn: Int) {
- 
-        subscriptions.removeAll()
-        print(subscriptions.count)
-        self.loadData = loadData
-        self.loadData
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { result in
-                    switch result {
-                    case .finished: print("finished")
-                    case .failure(let error): print(error.localizedDescription) } },
-                  receiveValue: { [weak self] card in
-                    print("moveEventListener: \(card)")
-                    //self?.moveCard(willMoveCard, beforeIndex: <#Int#>, toColumnId: toColumnId, toIndex: toIndexOfColumn)
-                    
                   })
             .store(in: &subscriptions)
     }

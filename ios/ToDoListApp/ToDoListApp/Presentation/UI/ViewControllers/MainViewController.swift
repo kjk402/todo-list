@@ -14,7 +14,6 @@ class MainViewController: UIViewController {
     @IBOutlet weak var historyView: UIView!
     
     private var cardViewModel: CardViewModel!
-    private var loadDataSubject = PassthroughSubject<Void,Never>()
     private var subsciptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
@@ -25,8 +24,6 @@ class MainViewController: UIViewController {
         self.cardViewModel = CardViewModel()
         cardViewModel.requestBoard()
         bind()
-        
-        
     }
     
     func bind() {
@@ -34,7 +31,6 @@ class MainViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in}, receiveValue:{ [weak self] _ in self?.collectionView.reloadData() })
             .store(in: &self.subsciptions)
-        
         
         cardViewModel?.reloadCardList
             .sink(receiveCompletion: { completion in
@@ -66,6 +62,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         cell.boardCountLabel.text = "\(cardViewModel.boards[indexPath.item].getBoard().count())"
         cell.inputButton.tag = indexPath.row
         cell.inputButton.addTarget(self, action: #selector(presentInputVC(_:)), for: .touchUpInside)
+        cell.tableView.identifier = indexPath.row
         
         return cell
     }

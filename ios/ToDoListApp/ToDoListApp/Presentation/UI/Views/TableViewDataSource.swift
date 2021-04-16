@@ -31,11 +31,12 @@ extension TableViewDataSource: UITableViewDataSource {
         
         cell.title = cardViewModel?.boards[column].getBoard().getCards()[indexPath.row].getTitle()
         cell.contents = cardViewModel?.boards[column].getBoard().getCards()[indexPath.row].getContents()
-        
+ 
         return cell
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+
         return true
     }
     
@@ -43,7 +44,7 @@ extension TableViewDataSource: UITableViewDataSource {
         cardViewModel?.removeEventListener(loadData: loadDataSubject.eraseToAnyPublisher(), willRemoveCardColumnId: column, willRemoveCard: willDeleteCard, indexOfColumn: indexOfColumn)
         
     }
-        
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
             guard let card = cardViewModel?.boards[column].getBoard().getCards()[indexPath.row] else {
