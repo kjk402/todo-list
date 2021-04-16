@@ -48,7 +48,6 @@ extension Endpoint {
     }
     
     static func remove(id: Int) -> Self {
-        print(Endpoint(path: "/card/\(id)").url)
         return Endpoint(path: "/card/\(id)")
     }
     
@@ -57,7 +56,6 @@ extension Endpoint {
     }
     
     static func move(id: Int, toColumn: Int, toIndexOfColumn: Int) -> Self {
-        print(Endpoint(path: "/card/\(id)/move/\(toColumn)/\(toIndexOfColumn+1)").url)
         return Endpoint(path: "/card/\(id)/move/\(toColumn)/\(toIndexOfColumn+1)")
     }
 }

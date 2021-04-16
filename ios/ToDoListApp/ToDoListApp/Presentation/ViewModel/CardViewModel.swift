@@ -106,7 +106,6 @@ class CardViewModel {
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in },
                   receiveValue: { [weak self] cards in
-                    print("addEventListener:  \(cards)")
                     self?.addCard(columnId: columnId, title: title, contents: contents)
                   })
                     .store(in: &subscriptions)
@@ -122,7 +121,6 @@ class CardViewModel {
                     case .finished: print("finished")
                     case .failure(let error): print(error.localizedDescription) } },
                   receiveValue: { [weak self] cards in
-                    print("editEventListener: \(cards)")
                     self?.editCard(card: willEditCard, toBeTitle: toBeTitle, toBeContents: toBeContents)
                   })
             .store(in: &subscriptions)
@@ -155,7 +153,6 @@ class CardViewModel {
                     case .finished: print("finished")
                     case .failure(let error): print(error.localizedDescription) } },
                   receiveValue: { movedCard in
-                  print(movedCard)
                     self.boards[toColumnId-1].insertCard(card: movedCard, at: toIndex)
                     self.boards[beforeColumnId].getBoard().removeCard(at: beforeIndex ?? 0)
                     self.reloadCardListSubject.send(.success(()))

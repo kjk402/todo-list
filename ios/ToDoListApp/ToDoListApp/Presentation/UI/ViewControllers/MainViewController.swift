@@ -61,19 +61,18 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         cell.titleLabel.text = cardViewModel.boards[indexPath.item].getTitle()
         cell.boardCountLabel.text = "\(cardViewModel.boards[indexPath.item].getBoard().count())"
         cell.inputButton.tag = indexPath.row
-        cell.inputButton.addTarget(self, action: #selector(presentInputVC(_:)), for: .touchUpInside)
+        cell.inputButton.addTarget(self, action: #selector(cardAddButtonTapped(_:)), for: .touchUpInside)
         cell.tableView.identifier = indexPath.row
         
         return cell
     }
     
-    @objc func presentInputVC(_ sender: UIButton) {
+    @objc func cardAddButtonTapped(_ sender: UIButton) {
         guard let inputViewController = self.storyboard?.instantiateViewController(withIdentifier: "InputViewController") as? InputViewController else { return }
         inputViewController.modalPresentationStyle = .overCurrentContext
         inputViewController.setupMode("add")
         inputViewController.setupCardViewModel(self.cardViewModel)
         inputViewController.setupColumnId(sender.tag)
-        print(sender.tag)
         present(inputViewController, animated: false, completion: nil)
     }
 }
