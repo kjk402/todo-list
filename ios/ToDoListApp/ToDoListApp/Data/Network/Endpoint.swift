@@ -9,40 +9,24 @@ import Foundation
 import Combine
 
 struct Endpoint {
-    var path: String
-    var queryItems: [URLQueryItem] = []
-}
-
-//1. URL 생성
-extension Endpoint {
-
+    private var path: String
     var url: URL {
         var components = URLComponents()
         components.scheme = "http"
         components.host = "ec2-3-36-241-44.ap-northeast-2.compute.amazonaws.com"
         components.port = 8080
         components.path = "\(path)"
+        
+        let url = components.url
+        assert(url != nil, "url is nil")
 
-        guard let url = components.url else {
-            preconditionFailure("Invalid URL components: \(components)")
-        }
-
-        return url
+        return url!
     }
-}
 
-extension Endpoint {
-
-    //GET용
-    static func cards(state: State) -> Self {
+    static func cards(state: CardState) -> Self {
         return Endpoint(path: "/card/\(state.rawValue)")
     }
     
-    static func histories() -> Self {
-        return Endpoint(path: "/history")
-    }
-    
-    //POST용
     static func add(columnId: Int) -> Self {
         return Endpoint(path: "/card/\(columnId+1)")
     }
@@ -58,8 +42,13 @@ extension Endpoint {
     static func move(id: Int, toColumn: Int, toIndexOfColumn: Int) -> Self {
         return Endpoint(path: "/card/\(id)/move/\(toColumn)/\(toIndexOfColumn+1)")
     }
+    
+    static func histories() -> Self {
+        return Endpoint(path: "/history")
+    }
 }
-enum State: Int {
+
+enum CardState: Int {
     case todo = 1
     case doing = 2
     case done = 3
@@ -68,4 +57,3 @@ enum State: Int {
         return rawValue
     }
 }
-

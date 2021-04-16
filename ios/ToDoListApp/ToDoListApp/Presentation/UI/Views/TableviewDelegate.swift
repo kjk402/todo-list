@@ -10,6 +10,8 @@ import UIKit
 class TableViewDelegate: NSObject {
     enum Action {
         static let gotoDone = "완료한 일로 이동"
+        static let edit = "완료한 일로 이동"
+        static let delete = "완료한 일로 이동"
     }
     
     private var cardViewModel: CardViewModel!
@@ -26,11 +28,11 @@ class TableViewDelegate: NSObject {
             self.cardViewModel.moveCard(card as! CardManageable, beforeColumnId: self.column , beforeIndex: indexPath.row,  toColumnId: 3, toIndex: 0)
         }
         
-        let edit = UIAction(title: "수정하기", image: .none) { action in
+        let edit = UIAction(title: Action.edit, image: .none) { action in
             self.gotoInputViewController(indexPath: indexPath)
         }
         
-        let delete = UIAction(title: "삭제하기", image: .none, attributes: .destructive) { action in
+        let delete = UIAction(title: Action.delete, image: .none, attributes: .destructive) { action in
             let card = self.cardViewModel?.boards[self.column].getBoard().getCards()[indexPath.row]
             self.cardViewModel.removeCard(card: card as! CardManageable, columnId: self.column, index: indexPath.row)
         }

@@ -10,7 +10,6 @@ import UIKit
 class TableViewDragDelegate: NSObject {
     private var cardViewModel: CardViewModel!
     private var column: Int
-    private var collectionView: UICollectionView!
     
     init(cardViewModel: CardViewModel, column: Int) {
         self.cardViewModel = cardViewModel
@@ -34,7 +33,7 @@ extension TableViewDragDelegate: UITableViewDragDelegate, UITableViewDropDelegat
         if session.localDragSession != nil {
             return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
         }
-        
+
         return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
     }
     
@@ -55,7 +54,7 @@ extension TableViewDragDelegate: UITableViewDragDelegate, UITableViewDropDelegat
         guard let myTableView = tableView as? MyTableView else {
             return
         }
-        
+
         cardViewModel.moveCard(beforeCardAndColumnAndIndex.0, beforeColumnId: beforeCardAndColumnAndIndex.1, beforeIndex: beforeCardAndColumnAndIndex.2, toColumnId: myTableView.identifier+1, toIndex: coordinator.destinationIndexPath?.row ?? 0)
     }
 }
