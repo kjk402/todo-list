@@ -14,7 +14,7 @@ class MainCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var boardCountLabel: UILabel!
     @IBOutlet weak var inputButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: MyTableView!
     
     private var cardViewModel: CardViewModel?
     private var column: Int!
@@ -27,7 +27,7 @@ class MainCell: UICollectionViewCell {
         self.column = column
         self.tableViewDelegate = TableViewDelegate(cardViewModel: cardViewModel, column: column)
         self.tableViewDataSource = TableViewDataSource(cardViewModel: cardViewModel, column: column)
-        self.tableViewDragDelegate = TableViewDragDelegate()
+        self.tableViewDragDelegate = TableViewDragDelegate(cardViewModel: cardViewModel, column: column)
         
         tableView.delegate = self.tableViewDelegate
         tableView.dragInteractionEnabled = true

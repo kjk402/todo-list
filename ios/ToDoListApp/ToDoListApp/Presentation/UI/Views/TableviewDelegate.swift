@@ -27,6 +27,8 @@ class TableViewDelegate: NSObject {
         }
         
         let delete = UIAction(title: "삭제하기", image: .none, attributes: .destructive) { action in
+            let card = self.cardViewModel?.boards[self.column].getBoard().getCards()[indexPath.row]
+            self.cardViewModel.removeCard(card: card as! CardManageable, columnId: self.column, index: indexPath.row)
         }
         
         return UIMenu(title: "", children: [goToDone, edit, delete])

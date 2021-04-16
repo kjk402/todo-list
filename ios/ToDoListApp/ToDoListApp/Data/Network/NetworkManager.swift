@@ -42,7 +42,6 @@ final class NetworkManager: HttpMethodProtocol {
         return URLSession.shared.dataTaskPublisher(for: request)
             .map(\.data)
             .decode(type: T.self, decoder: JSONDecoder())
-            .print("asdf")
             .eraseToAnyPublisher()
     }
     
