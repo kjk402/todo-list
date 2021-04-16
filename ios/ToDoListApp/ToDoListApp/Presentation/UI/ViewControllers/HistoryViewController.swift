@@ -39,7 +39,7 @@ class HistoryViewController: UIViewController {
         historyCellRegistration = UICollectionView.CellRegistration { cell, indexPath, history in
             cell.authorLabel.text = "@만사"
             cell.createdAtLabel.text = "1분전"
-            cell.contentsLabel.text = "\(history.getTitle()),\(history.getAction())"
+            cell.contentsLabel.text = "\(history.getHistory())"
             cell.imageView.image = UIImage(named: "history")
         }
         

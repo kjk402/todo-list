@@ -9,7 +9,4 @@ import Foundation
 
 protocol HistoryManageable: Decodable {
     func getTitle() -> String
-    func getAction() -> String
-    func getFromColumnId() -> Int
-    func getToColumnId() -> Int
 }

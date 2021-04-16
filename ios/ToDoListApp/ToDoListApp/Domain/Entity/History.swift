@@ -59,15 +59,7 @@ class History: Codable, HistoryManageable {
         return self.title
     }
     
-    func getAction() -> String {
-        return self.action
-    }
-    
-    func getFromColumnId() -> Int {
-        return self.fromColumnId
-    }
-    
-    func getToColumnId() -> Int {
-        return self.toColumnId ?? 0
+    func getHistory() -> String {
+        return "\(self.title)을(를) \(self.toColumnId ?? 0)에 \(self.action)했습니다."
     }
 }
