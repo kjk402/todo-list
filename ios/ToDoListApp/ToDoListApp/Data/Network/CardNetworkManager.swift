@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol CardNetworkManagerProtocol: class {
-    func getCards(state: State) -> AnyPublisher<Cards, Error>
+    func getCards(state: CardState) -> AnyPublisher<Cards, Error>
     func postCard(columnId: Int, title: String, contents: String) -> AnyPublisher<Card, Error>
     func putCard(id: Int, title: String, contents: String) -> AnyPublisher<Card, Error>
     func removeCard(id: Int) -> AnyPublisher<Int, NetworkError>
@@ -29,7 +29,7 @@ class CardNetworkManager: CardNetworkManagerProtocol {
         self.init(networkManager: networkManager)
     }
     
-    func getCards(state: State) -> AnyPublisher<Cards, Error> {
+    func getCards(state: CardState) -> AnyPublisher<Cards, Error> {
         let endpoint = Endpoint.cards(state: state)
         return networkManager.get(type: Cards.self, url: endpoint.url)
     }

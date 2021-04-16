@@ -21,7 +21,7 @@ protocol CardManageable: Codable {
 protocol CardUseCasePort {
     func add(columnId: Int, title: String, contents: String) -> AnyPublisher<Card, Error>
     func edit(id: Int, title: String, contents: String) -> AnyPublisher<Card, Error>
-    func get(state: State) -> AnyPublisher<Cards, Error>
+    func get(state: CardState) -> AnyPublisher<Cards, Error>
     func isEnabledCardEnrollemnt(count: Int) -> Bool
     func remove(id: Int) -> AnyPublisher<Int, NetworkError>
     func move(id: Int, toColumnId: Int, toIndex: Int) -> AnyPublisher<Card, Error>
