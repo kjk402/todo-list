@@ -9,13 +9,11 @@ import Foundation
 import Combine
 
 protocol HistoryNetworkManagerProtocol: class {
-    var networkManager: HttpMethodProtocol { get }
-
     func getHistories() -> AnyPublisher<Histories, Error>
 }
 
 class HistoryNetworkManager: HistoryNetworkManagerProtocol {
-    var networkManager: HttpMethodProtocol
+    private var networkManager: HttpMethodProtocol!
     
     init(networkManager: HttpMethodProtocol) {
         self.networkManager = networkManager

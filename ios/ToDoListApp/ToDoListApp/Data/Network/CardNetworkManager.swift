@@ -9,8 +9,6 @@ import Foundation
 import Combine
 
 protocol CardNetworkManagerProtocol: class {
-    var networkManager: HttpMethodProtocol { get }
-
     func getCards(state: State) -> AnyPublisher<Cards, Error>
     func postCard(columnId: Int, title: String, contents: String) -> AnyPublisher<Card, Error>
     func putCard(id: Int, title: String, contents: String) -> AnyPublisher<Card, Error>
@@ -20,7 +18,7 @@ protocol CardNetworkManagerProtocol: class {
 
 class CardNetworkManager: CardNetworkManagerProtocol {
     
-    var networkManager: HttpMethodProtocol
+    private var networkManager: HttpMethodProtocol!
     
     init(networkManager: HttpMethodProtocol) {
         self.networkManager = networkManager
