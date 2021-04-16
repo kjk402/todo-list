@@ -37,6 +37,18 @@ class Doing: BoardManageable, CardFactory {
         return self.title
     }
     
+    func getCardTitle(index: Int) -> String {
+        return self.board.getCards()[index].getTitle()
+    }
+    
+    func getCardContents(index: Int) -> String {
+        return self.board.getCards()[index].getContents()
+    }
+    
+    func boardCount() -> Int {
+        return self.board.getCards().count
+    }
+    
     func editCard(_ card: Card, index: Int) {
         self.board.editCard(at: index, for: card)
     }

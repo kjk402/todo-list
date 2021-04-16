@@ -27,6 +27,14 @@ class Cards: Codable {
         return self.cards
     }
     
+    func getCardTitle(index: Int) -> String {
+        return self.cards[index].getTitle()
+    }
+    
+    func getCardContents(index: Int) -> String {
+        return self.cards[index].getContents()
+    }
+    
     func appendCard(_ card: Card) {
         self.cards.append(card)
     }

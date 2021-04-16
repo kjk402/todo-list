@@ -25,7 +25,7 @@ extension BoardDataSource: UICollectionViewDataSource {
 
         cell.setup(with: self.cardViewModel, column: indexPath.item)
         cell.titleLabel.text = cardViewModel.boards[indexPath.item].getTitle()
-        cell.boardCountLabel.text = "\(cardViewModel.boards[indexPath.item].getBoard().count())"
+        cell.boardCountLabel.text = "\(cardViewModel.boards[indexPath.item].boardCount())"
         cell.inputButton.tag = indexPath.row
         cell.inputButton.addTarget(self, action: #selector(cardAddButtonTapped(_:)), for: .touchUpInside)
         cell.tableView.identifier = indexPath.row

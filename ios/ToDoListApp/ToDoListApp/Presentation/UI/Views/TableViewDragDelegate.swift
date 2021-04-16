@@ -31,10 +31,15 @@ extension TableViewDragDelegate: UITableViewDragDelegate, UITableViewDropDelegat
     }
     
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        if session.localDragSession != nil {
+            return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        }
+        
         return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
     }
     
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        
         guard let dragItems = coordinator.session.localDragSession?.items else {
             return
         }
@@ -50,7 +55,7 @@ extension TableViewDragDelegate: UITableViewDragDelegate, UITableViewDropDelegat
         guard let myTableView = tableView as? MyTableView else {
             return
         }
-       
+        
         cardViewModel.moveCard(beforeCardAndColumnAndIndex.0, beforeColumnId: beforeCardAndColumnAndIndex.1, beforeIndex: beforeCardAndColumnAndIndex.2, toColumnId: myTableView.identifier+1, toIndex: coordinator.destinationIndexPath?.row ?? 0)
     }
 }

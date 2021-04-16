@@ -30,6 +30,14 @@ class ToDo: BoardManageable, CardFactory {
         return self.board
     }
     
+    func getCardTitle(index: Int) -> String {
+        return self.board.getCards()[index].getTitle()
+    }
+    
+    func getCardContents(index: Int) -> String {
+        return self.board.getCards()[index].getContents()
+    }
+    
     func count() -> Int {
         return self.board.count()
     }
@@ -40,6 +48,10 @@ class ToDo: BoardManageable, CardFactory {
     
     func getTitle() -> String {
         return self.title
+    }
+    
+    func boardCount() -> Int {
+        return self.board.getCards().count
     }
     
     func editCard(_ card: Card, index: Int) {
@@ -53,7 +65,6 @@ class ToDo: BoardManageable, CardFactory {
     func getColumn() -> Int {
         return self.column
     }
-    
     
     func insertCard(card: Card, at destinationIndex: Int) {
         self.board.insertCard(card: card, at: destinationIndex)

@@ -29,8 +29,8 @@ extension CardDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CardCell.identifier, for: indexPath) as? CardCell else { return UITableViewCell() }
         
-        cell.title = cardViewModel?.boards[column].getBoard().getCards()[indexPath.row].getTitle()
-        cell.contents = cardViewModel?.boards[column].getBoard().getCards()[indexPath.row].getContents()
+        cell.title = cardViewModel?.boards[column].getCardTitle(index: indexPath.row)
+        cell.contents = cardViewModel?.boards[column].getCardContents(index: indexPath.row)
  
         return cell
     }
