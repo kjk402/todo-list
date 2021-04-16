@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class TableViewDataSource: NSObject {
+class CardDataSource: NSObject {
     private var cardViewModel: CardViewModel!
     private var column: Int!
     
@@ -21,7 +21,7 @@ class TableViewDataSource: NSObject {
     }
 }
 
-extension TableViewDataSource: UITableViewDataSource {
+extension CardDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cardViewModel?.boards[column].count() ?? 0
     }

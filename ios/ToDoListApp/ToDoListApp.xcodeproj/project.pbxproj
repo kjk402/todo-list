@@ -31,7 +31,7 @@
 		9386C09826244721008645D9 /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386C09726244721008645D9 /* Cards.swift */; };
 		9386C0A826258913008645D9 /* TableviewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386C0A726258913008645D9 /* TableviewDelegate.swift */; };
 		9386C0AB26259426008645D9 /* TableViewDragDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386C0AA26259426008645D9 /* TableViewDragDelegate.swift */; };
-		9386C0AF26259697008645D9 /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386C0AE26259697008645D9 /* TableViewDataSource.swift */; };
+		9386C0AF26259697008645D9 /* CardDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386C0AE26259697008645D9 /* CardDataSource.swift */; };
 		9386C0B52626C69F008645D9 /* TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386C0B42626C69F008645D9 /* TextFieldDelegate.swift */; };
 		9386C0B82626DC31008645D9 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386C0B72626DC31008645D9 /* HistoryViewController.swift */; };
 		9386C0BC26270FFE008645D9 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386C0BB26270FFE008645D9 /* HistoryViewModel.swift */; };
@@ -41,6 +41,7 @@
 		9386C0C82627150D008645D9 /* HistoryNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386C0C72627150D008645D9 /* HistoryNetworkManager.swift */; };
 		9386C0CB2627176C008645D9 /* HistoryUseCasePort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386C0CA2627176C008645D9 /* HistoryUseCasePort.swift */; };
 		9386C0CE26272042008645D9 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386C0CD26272042008645D9 /* HistoryCell.swift */; };
+		9386C0F026294B95008645D9 /* BoardDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386C0EF26294B95008645D9 /* BoardDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,7 +71,7 @@
 		9386C09726244721008645D9 /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
 		9386C0A726258913008645D9 /* TableviewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableviewDelegate.swift; sourceTree = "<group>"; };
 		9386C0AA26259426008645D9 /* TableViewDragDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDragDelegate.swift; sourceTree = "<group>"; };
-		9386C0AE26259697008645D9 /* TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDataSource.swift; sourceTree = "<group>"; };
+		9386C0AE26259697008645D9 /* CardDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDataSource.swift; sourceTree = "<group>"; };
 		9386C0B42626C69F008645D9 /* TextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldDelegate.swift; sourceTree = "<group>"; };
 		9386C0B72626DC31008645D9 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		9386C0BB26270FFE008645D9 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
@@ -80,6 +81,7 @@
 		9386C0C72627150D008645D9 /* HistoryNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryNetworkManager.swift; sourceTree = "<group>"; };
 		9386C0CA2627176C008645D9 /* HistoryUseCasePort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryUseCasePort.swift; sourceTree = "<group>"; };
 		9386C0CD26272042008645D9 /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
+		9386C0EF26294B95008645D9 /* BoardDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +149,8 @@
 				9386C0CD26272042008645D9 /* HistoryCell.swift */,
 				9386C0A726258913008645D9 /* TableviewDelegate.swift */,
 				9386C0AA26259426008645D9 /* TableViewDragDelegate.swift */,
-				9386C0AE26259697008645D9 /* TableViewDataSource.swift */,
+				9386C0AE26259697008645D9 /* CardDataSource.swift */,
+				9386C0EF26294B95008645D9 /* BoardDataSource.swift */,
 				9386C0B42626C69F008645D9 /* TextFieldDelegate.swift */,
 				1E7999BA2628CA0800074872 /* MyTableView.swift */,
 			);
@@ -298,6 +301,7 @@
 				9386C0C2262711B6008645D9 /* HistoryManageable.swift in Sources */,
 				9386C0B82626DC31008645D9 /* HistoryViewController.swift in Sources */,
 				9348A4B1261D87F5002B63C6 /* CardViewModel.swift in Sources */,
+				9386C0F026294B95008645D9 /* BoardDataSource.swift in Sources */,
 				9386C0AB26259426008645D9 /* TableViewDragDelegate.swift in Sources */,
 				9386C0C82627150D008645D9 /* HistoryNetworkManager.swift in Sources */,
 				9386C07F261F068C008645D9 /* ToDo.swift in Sources */,
@@ -314,7 +318,7 @@
 				9386C0C5262714CD008645D9 /* HistoryUseCase.swift in Sources */,
 				9386C09826244721008645D9 /* Cards.swift in Sources */,
 				9386C054261D9B7F008645D9 /* MainCell.swift in Sources */,
-				9386C0AF26259697008645D9 /* TableViewDataSource.swift in Sources */,
+				9386C0AF26259697008645D9 /* CardDataSource.swift in Sources */,
 				9386C067261EE907008645D9 /* CardNetworkManager.swift in Sources */,
 				9386C062261EE8E3008645D9 /* Endpoint.swift in Sources */,
 				933A1E7C261C387B0017FFBD /* SceneDelegate.swift in Sources */,

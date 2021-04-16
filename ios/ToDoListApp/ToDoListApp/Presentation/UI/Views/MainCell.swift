@@ -26,7 +26,7 @@ class MainCell: UICollectionViewCell {
         self.cardViewModel = cardViewModel
         self.column = column
         self.tableViewDelegate = TableViewDelegate(cardViewModel: cardViewModel, column: column)
-        self.tableViewDataSource = TableViewDataSource(cardViewModel: cardViewModel, column: column)
+        self.tableViewDataSource = CardDataSource(cardViewModel: cardViewModel, column: column)
         self.tableViewDragDelegate = TableViewDragDelegate(cardViewModel: cardViewModel, column: column)
         
         tableView.delegate = self.tableViewDelegate
